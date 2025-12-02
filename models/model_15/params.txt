@@ -1,0 +1,6 @@
+threshold: 100
+min_count: 10
+passes: 500
+iterations: 1000
+chunksize: 500
+cv_score: 0.43264831579358504

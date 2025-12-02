@@ -1,0 +1,9 @@
+threshold: 200
+min_count: 20
+passes: 500
+iterations: 2000
+chunksize: 2000
+alpha: 0.1
+eta: 0.1
+cv_score: 0.4938943563430564
+ perplexity: -5.791517120275099
