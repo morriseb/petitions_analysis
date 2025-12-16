@@ -1,0 +1,744 @@
+---
+title: "E-petition analysis results"
+format: dashboard
+execute:
+    echo: False
+jupyter: python3
+scrolling: false
+---
+
+```{python}
+### Background python code (loading files and setting up plotting functions)
+
+# saving/accessing files
+import os
+from pathlib import Path
+
+# editing files
+import geopandas as gpd
+import pandas as pd
+import json
+import csv
+
+# maths functions
+import numpy as np
+import math
+
+# visuals
+from ipyleaflet import Map, basemaps, basemap_to_tiles
+import matplotlib.pyplot as plt
+from matplotlib.collections import PatchCollection
+from matplotlib.patches import RegularPolygon
+
+petitions_region_df = pd.read_csv("data/Top_topics_by_region.csv")
+petitions_con_df = pd.read_csv("data/Top_topics_by_constituency.csv")
+petitions_df = pd.read_csv("data/Top_topics.csv")
+
+# setting up maps for hexmap
+# 2015 uses file from 2010 as couldn't find data on 2015
+map_2015_df = pd.read_csv("../map_data/con_2015/uk_hex_2015.csv")
+map_2024_df = pd.read_csv("../map_data/con_2024/uk_hex_2024.csv")
+
+# unsorted files leed to issues later when merging with petitions_df so sorting by constituency
+map_2015_df = map_2015_df.sort_values(by="Constituency")
+map_2024_df = map_2024_df.sort_values(by="Constituency")
+
+# filtering petitions df by year
+petitions_region_2015 = petitions_region_df[petitions_region_df["Year"]==2015]
+petitions_region_2016 = petitions_region_df[petitions_region_df["Year"]==2016]
+petitions_region_2017 = petitions_region_df[petitions_region_df["Year"]==2017]
+petitions_region_2018 = petitions_region_df[petitions_region_df["Year"]==2018]
+petitions_region_2019 = petitions_region_df[petitions_region_df["Year"]==2019]
+petitions_region_2020 = petitions_region_df[petitions_region_df["Year"]==2020]
+petitions_region_2021 = petitions_region_df[petitions_region_df["Year"]==2021]
+petitions_region_2022 = petitions_region_df[petitions_region_df["Year"]==2022]
+petitions_region_2023 = petitions_region_df[petitions_region_df["Year"]==2023]
+petitions_region_2024 = petitions_region_df[petitions_region_df["Year"]==2024]
+petitions_region_2025 = petitions_region_df[petitions_region_df["Year"]==2025]
+
+# filtering petitions df by year
+petitions_con_2015 = petitions_con_df[petitions_con_df["Year"]==2015].sort_values(by="Constituency")
+petitions_con_2016 = petitions_con_df[petitions_con_df["Year"]==2016].sort_values(by="Constituency")
+petitions_con_2017 = petitions_con_df[petitions_con_df["Year"]==2017].sort_values(by="Constituency")
+petitions_con_2018 = petitions_con_df[petitions_con_df["Year"]==2018].sort_values(by="Constituency")
+petitions_con_2019 = petitions_con_df[petitions_con_df["Year"]==2019].sort_values(by="Constituency")
+petitions_con_2020 = petitions_con_df[petitions_con_df["Year"]==2020].sort_values(by="Constituency")
+petitions_con_2021 = petitions_con_df[petitions_con_df["Year"]==2021].sort_values(by="Constituency")
+petitions_con_2022 = petitions_con_df[petitions_con_df["Year"]==2022].sort_values(by="Constituency")
+petitions_con_2023 = petitions_con_df[petitions_con_df["Year"]==2023].sort_values(by="Constituency")
+petitions_con_2024 = petitions_con_df[petitions_con_df["Year"]==2024].sort_values(by="Constituency")
+petitions_con_2025 = petitions_con_df[petitions_con_df["Year"]==2025].sort_values(by="Constituency")
+
+# region boundaries have less change to borders and so have just chosen the 2018 file from ONS and changed the region 
+# named 'Eastern' to 'East of England' to match petition files
+region_shapefile = Path("../map_data/regions/European_Electoral_Regions_Dec_2018_FCB_UK.shp")
+map_regions_df = gpd.read_file(region_shapefile).rename(columns={"eer18nm":"Region"})
+map_regions_df.loc[map_regions_df['Region'] == "Eastern", 'Region'] = "East of England"
+
+# combining petition data with map data
+combined_region_2015 = map_regions_df.set_index("Region").join(petitions_region_2015.set_index("Region")).reset_index()
+combined_region_2016 = map_regions_df.set_index("Region").join(petitions_region_2016.set_index("Region")).reset_index()
+combined_region_2017 = map_regions_df.set_index("Region").join(petitions_region_2017.set_index("Region")).reset_index()
+combined_region_2018 = map_regions_df.set_index("Region").join(petitions_region_2018.set_index("Region")).reset_index()
+combined_region_2019 = map_regions_df.set_index("Region").join(petitions_region_2019.set_index("Region")).reset_index()
+combined_region_2020 = map_regions_df.set_index("Region").join(petitions_region_2020.set_index("Region")).reset_index()
+combined_region_2021 = map_regions_df.set_index("Region").join(petitions_region_2021.set_index("Region")).reset_index()
+combined_region_2022 = map_regions_df.set_index("Region").join(petitions_region_2022.set_index("Region")).reset_index()
+combined_region_2023 = map_regions_df.set_index("Region").join(petitions_region_2023.set_index("Region")).reset_index()
+combined_region_2024 = map_regions_df.set_index("Region").join(petitions_region_2024.set_index("Region")).reset_index()
+combined_region_2025 = map_regions_df.set_index("Region").join(petitions_region_2025.set_index("Region")).reset_index()
+
+combined_con_2015 = map_2015_df.set_index("Constituency").join(petitions_con_2015.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2016 = map_2015_df.set_index("Constituency").join(petitions_con_2016.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2017 = map_2015_df.set_index("Constituency").join(petitions_con_2017.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2018 = map_2015_df.set_index("Constituency").join(petitions_con_2018.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2019 = map_2015_df.set_index("Constituency").join(petitions_con_2019.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2020 = map_2015_df.set_index("Constituency").join(petitions_con_2020.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2021 = map_2015_df.set_index("Constituency").join(petitions_con_2021.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2022 = map_2015_df.set_index("Constituency").join(petitions_con_2022.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2023 = map_2015_df.set_index("Constituency").join(petitions_con_2023.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2024 = map_2024_df.set_index("Constituency").join(petitions_con_2024.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+combined_con_2025 = map_2024_df.set_index("Constituency").join(petitions_con_2025.set_index("Constituency"), lsuffix='hex_Constituency', rsuffix='Constituency').reset_index()
+
+def top_constituencies(file, topic):
+    """ 
+    Finds the top constituencies for a given topic and returns the top 5
+    :param file: given petitions file for that year/area
+    :param topic: string with the column name for the topic regarded e.g. 'Weighted Topic 5'
+    :output: list of 5 constituency names
+    """
+    # sort file by column
+    file = file.sort_values(by=topic, ascending=False)
+    # find top 5 values
+    constituencies = file['Constituency'][0:5].values
+    
+    return constituencies
+
+
+def plot_map_by_year(columns, titles, filtered_parl_file, topic, n_cols):
+    """ 
+    Function to plot signature counts over the UK heatmap for given year. 
+    :param columns: list of names of columns to plot
+    :param titles: titles of each plot (names of topics)
+    :param filtered_parl_file: dataframe filtered by parliament
+    :param year: integer indicating year for data for suptitle
+    """
+    # Determine subplot layout
+    n_rows = math.ceil(len(columns) / n_cols)
+
+    if n_cols == 1:
+        # Create subplots
+        fig, ax = plt.subplots(1, n_cols, figsize=(8, 7))
+        # plot the heatmap
+        filtered_parl_file.plot(column=columns[0], cmap="OrRd", linewidth=0.8, ax=ax, legend=True)
+        ax.set_title(titles[0], fontsize=18)
+        ax.axis("off")
+    else:
+        # Create subplots
+        fig, axes = plt.subplots(n_rows, n_cols, figsize=(12, 5 * n_rows))
+        axes = axes.flatten()
+
+        # Plot each column
+        for i, column in enumerate(columns):
+            ax = axes[i]
+            filtered_parl_file.plot(column=column, cmap="OrRd", linewidth=0.8, ax=ax, legend=True)
+            ax.set_title(titles[i], fontsize=16)
+            ax.axis("off")
+
+        # Hide any unused subplots
+        for j in range(len(columns), len(axes)):
+            axes[j].axis("off")    
+
+    plt.tight_layout()
+    plt.show()
+```
+
+```{python}
+class HexMap:
+    """
+    HexMap creates a map by drawing equally sized polygons.
+    These maps are useful to visualise election results, as
+    metropolitan areas can often distort how many people are
+    voting a certain way.
+    """
+
+    def __init__(self):
+        self._map_df = None
+        self._map_fig = None
+        self._output_loc = None
+        self._columns_to_plot = None
+        self._n_cols = 1
+        self._orientation = "odd-r"
+
+    def load_map(self, hexmap, is_path=True, columns_to_plot=None, n_cols = 1, **kwargs):
+        if is_path:
+            hexmap = pd.read_csv(hexmap, **kwargs)
+        cols = hexmap.columns
+        for required_col in ("q", "r", "Constituency"):
+            if required_col not in cols:
+                raise RuntimeError(
+                    "{} is not a column in the map dataframe. "
+                    "Columns are {}.".format(required_col, cols)
+                )
+        self._map_df = hexmap
+
+        if columns_to_plot is not None:
+            self._columns_to_plot = columns_to_plot
+
+        self._n_cols = n_cols
+
+    def add_data(self, data, map_join, data_join, is_path=True, **kwargs):
+        if self._map_df is None:
+            raise RuntimeError("You should load a map first.")
+
+        if is_path:
+            data = pd.read_csv(data, **kwargs)
+
+        self._map_df = (
+            self._map_df.set_index(map_join)
+            .join(data.set_index(data_join))
+            .reset_index()
+        )
+
+    def draw_map(
+        self,
+        fig=None,
+        _cmap="viridis",
+        v_min=None,
+        v_max=None,
+        titles=None,
+        title_kwargs=None
+    ):
+        if fig is None:
+            n_cols = self._n_cols
+            if n_cols == 1:
+                n_rows = 1
+                fig, axes = plt.subplots(n_rows, n_cols, figsize=(8, 7))
+            else:
+                n_rows = math.ceil(len(self._columns_to_plot) / n_cols)
+                fig, axes = plt.subplots(n_rows, n_cols, figsize=(7*n_cols, 7 * n_rows))
+                axes = axes.flatten()
+        else:
+            ax = fig.axes[0]
+            
+        if self._columns_to_plot is not None:
+            if n_cols == 1:
+                ax = axes
+                ax.axis("off")
+
+                column = self._columns_to_plot[0]
+
+                y_min = 1000
+                y_max = -1000
+
+                d = 0.5 / np.sin(np.pi / 3)
+                y_diff = np.sqrt(1 - 0.5 ** 2)
+                patches = []
+                colours = []
+                for j in range(self._map_df.shape[0]):
+                    r = self._map_df.loc[j, "r"]
+                    q = self._map_df.loc[j, "q"]
+                    c = self._map_df.loc[j, column]
+
+                    if r % 2 == 1:
+                        q = q + 0.5
+                    r = y_diff * r
+                    hexagon = RegularPolygon((q, r), numVertices=6, radius=d, edgecolor="k")
+                    patches.append(hexagon)
+                    colours.append(c)
+
+                    if r < y_min:
+                        y_min = r - 1.0
+                    if r > y_max:
+                        y_max = r + 1.0
+
+                x_min = self._map_df["q"].min() - 1.0
+                x_max = self._map_df["q"].max() + 1.0
+
+                _cmap = _cmap if column is not None else None
+                p = PatchCollection(patches, cmap=plt.get_cmap(_cmap), alpha=1.0)
+                p.set_array(np.array(colours))
+
+                if v_min is None:
+                    v_min = self._map_df[column].min()
+                if v_max is None:
+                    v_max = self._map_df[column].max()
+
+                p.set_clim([v_min, v_max])
+                plt.colorbar(mappable=p, ax=axes, shrink=0.5)
+
+                ax.add_collection(p)
+                ax.set_xlim([x_min, x_max])
+                ax.set_ylim([y_min, y_max])
+
+                if titles is not None:
+                    ax.set_title(titles[0], fontdict=title_kwargs)
+
+            else:
+                for i, column in enumerate(self._columns_to_plot):
+                    ax = axes[i]
+                    ax.axis("off")
+                    
+                    y_min = 1000
+                    y_max = -1000
+
+                    d = 0.5 / np.sin(np.pi / 3)
+                    y_diff = np.sqrt(1 - 0.5 ** 2)
+                    patches = []
+                    colours = []
+                    for j in range(self._map_df.shape[0]):
+                        r = self._map_df.loc[j, "r"]
+                        q = self._map_df.loc[j, "q"]
+                        c = self._map_df.loc[j, column]
+
+                        if r % 2 == 1:
+                            q = q + 0.5
+                        r = y_diff * r
+                        hexagon = RegularPolygon((q, r), numVertices=6, radius=d, edgecolor="k")
+                        patches.append(hexagon)
+                        colours.append(c)
+
+                        if r < y_min:
+                            y_min = r - 1.0
+                        if r > y_max:
+                            y_max = r + 1.0
+
+                    x_min = self._map_df["q"].min() - 1.0
+                    x_max = self._map_df["q"].max() + 1.0
+
+                    _cmap = _cmap if column is not None else None
+                    p = PatchCollection(patches, cmap=plt.get_cmap(_cmap), alpha=1.0)
+                    p.set_array(np.array(colours))
+
+                    if v_min is None:
+                        v_min = self._map_df[column].min()
+                    if v_max is None:
+                        v_max = self._map_df[column].max()
+
+                        p.set_clim([v_min, v_max])
+                        plt.colorbar(mappable=p, ax=axes[i], shrink=0.5)
+
+                    ax.add_collection(p)
+                    ax.set_xlim([x_min, x_max])
+                    ax.set_ylim([y_min, y_max])
+
+                    if titles is not None:
+                        ax.set_title(titles[i], fontdict=title_kwargs)
+
+                for j in range(len(self._columns_to_plot), len(axes)):
+                    axes[j].axis("off")
+
+        self._map_fig = fig
+        return fig
+
+    def save_map(self, save_name, save_dir=None, **kwargs):
+        if self._map_fig is None:
+            raise RuntimeError("You need to draw the map before attempting to save the figure.")
+
+        if save_dir is not None:
+            self.save_directory = save_dir
+
+        if self.save_directory is not None:
+            save_name = os.path.join(self.save_directory, save_name)
+
+        self._map_fig.savefig(save_name, **kwargs)
+
+    def annotate_map(self, annotation, **kwargs):
+        if self._map_fig is None:
+            raise RuntimeError("Draw the map before adding an annotation to it.")
+
+        ax = self._map_fig.axes[0]
+        ax.annotate(annotation, **kwargs)
+
+        return self._map_fig
+
+    @property
+    def columns_to_plot(self):
+        return self._columns_to_plot
+
+    @columns_to_plot.setter
+    def columns_to_plot(self, _new_col):
+        if self._map_df is None:
+            raise RuntimeError("You should load a map before setting the columns.")
+
+        if _new_col not in self._map_df.columns:
+            raise KeyError(
+                "Value column {} is not in the map dataframe. "
+                "Columns are {}.".format(_new_col, self._map_df.columns)
+            )
+        else:
+            self._columns_to_plot = _new_col
+
+    @property
+    def save_directory(self):
+        return self._output_loc
+
+    @save_directory.setter
+    def save_directory(self, new_dir):
+        if not os.path.exists(new_dir):
+            os.mkdir(new_dir)
+        self._output_loc = new_dir
+
+    @property
+    def orientation(self):
+        return self._orientation
+
+    @orientation.setter
+    def orientation(self, new_orientation):
+        new_orientation = new_orientation.lower()
+        if new_orientation == "odd-r":
+            self._orientation = new_orientation
+        elif new_orientation in ("even-r", "odd-l", "even-l"):
+            raise NotImplementedError(
+                "{} has not yet been implemented".format(new_orientation)
+            )
+        else:
+            raise KeyError(
+                "{} is not a recognised orientation.".format(new_orientation)
+            )
+```
+
+# Covid {orientation="columns"}
+
+## Overview {width=30%}
+
+During 2020 and 2021, many petitions centered around themes from Covid. Topics evolved from economic concerns in 2020 (furlough, business closures) to vaccination and school safety issues in 2021. Regional and Constituency based patterns show some distinct geographic clustering of petition priorities.
+
+**Key Findings:**
+
+- Business restrictions showed some regional variation in petition engagement especially when considering school closures vs gym and other business closures.
+- Vaccination themes showed more broad national concern.
+- Cancelling exams for 2021/2022 received a huge amount of interest across England, and Wales but not so much from Northern Irish and Scottish constituencies. This may be due to these regions having a separate exam system and so petitions for exam cancellation would have been received through the Scottish parliaments own website.
+- Schools and safety theme had a strong outlier from North Cornwall surrounding a petition around dangerous driving whilst other key petitions for this theme came from keeping schools closed to protect the vulnerable until vaccination rollout and health visiting provisions.
+
+## Analysis {width=70%}
+
+<div class="button-container">
+  <button class="viz-button active" onclick="showViz('covid', 'weighted')">Weighted values</button>
+  <button class="viz-button" onclick="showViz('covid', 'raw')">Raw values</button>
+</div>
+
+<div id="covid-weighted" class="viz-content">
+
+```{python}
+#| label: fig 1.a
+#| fig-cap: "A hex map of covid themed petitions from 2020-21"
+#| fig-subcap: 
+#|      - "Covid petitions 2020"
+#|      - "Covid petitions 2021"
+#| layout-nrow: 2
+#| column: page-inset
+titles = ["Covid, furlough\n and financial support", "Business (nurseries, schools)\nopening restrictions", 
+          "Vaccination prioritisation and\nhair salon closure", "Business (Fitness) reopening\nrestrictions and face coverings"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2020, is_path=False, 
+                   columns_to_plot=["Weighted Topic 14", "Weighted Topic 13", "Weighted Topic 6", "Weighted Topic 12"], 
+                   n_cols=2)
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+
+titles = ["Covid travel and masks", "Vaccination programme", "Schools and safety", "Cancelling exams"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2021, is_path=False, 
+                   columns_to_plot=["Weighted Topic 10", "Weighted Topic 15", "Weighted Topic 9", "Weighted Topic 2"], 
+                   n_cols=2)
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+```
+
+</div>
+
+<div id="covid-raw" class="viz-content" style="display: none;">
+
+```{python}
+#| label: fig 1.b
+#| fig-cap: "A hex map of covid themed petitions from 2020-21"
+#| fig-subcap: 
+#|      - "Covid petitions 2020"
+#|      - "Covid petitions 2021"
+#| layout-nrow: 2
+#| column: page-inset
+titles = ["Covid, furlough\n and financial support", "Business (nurseries, schools)\nopening restrictions", 
+          "Vaccination prioritisation and\nhair salon closure", "Business (Fitness) reopening\nrestrictions and face coverings"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2020, is_path=False, 
+                   columns_to_plot=["Topic 14 Count", "Topic 13 Count", "Topic 6 Count", "Topic 12 Count"], 
+                   n_cols=2)
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+titles = ["Covid travel and masks", "Vaccination programme", "Schools and safety", "Cancelling exams"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2021, is_path=False, 
+                   columns_to_plot=["Topic 10 Count", "Topic 15 Count", "Topic 9 Count", "Topic 2 Count"], 
+                   n_cols=2)
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+```
+
+</div>
+
+# Environment {orientation="rows"}
+
+## Overview {height=30%}
+
+Environmental petitions showed consistent engagement across 2023 and 2024, with topics ranging from wildlife protection to climate policy. The more broader climate based petitions seem to attract focused interest from select areas whereas the broader interest from 2023 seems to stem from national reaction to the XL Bully legislation.
+
+**Key Observations:**
+
+- Concerns over pets and wildlife show more uniform national distribution
+- 2024 has a key outlier from Keighley and Ilkley from a popular petition regarding windfarms.
+- Issues have changed from domestic to broader international climate interest but interest overall appears to have gone down.
+
+## Analysis {height=70%}
+
+<div class="button-container">
+  <button class="viz-button active" onclick="showViz('env', 'weighted')">Weighted values</button>
+  <button class="viz-button" onclick="showViz('env', 'raw')">Raw values</button>
+</div>
+
+<div id="env-weighted" class="viz-content">
+
+```{python}
+#| label: fig 2.a
+#| fig-cap: "A hex map of environmental and animal themed petitions from 2023-24"
+#| fig-subcap: 
+#|      - "Environment petitions 2023"
+#|      - "Environment petitions 2024"
+#| layout-ncol: 2
+#| column: page-inset
+titles = ["Pets, Wildlife and environment"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2023, is_path=False, columns_to_plot=["Weighted Topic 5"])
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+titles = ["Climate, environment and ECHR"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2024, is_path=False, columns_to_plot=["Weighted Topic 16"])
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+```
+
+
+</div>
+
+<div id="env-raw" class="viz-content" style="display: none;">
+
+```{python}
+#| label: fig 2.b
+#| fig-cap: "A hex map of environmental and animal themed petitions from 2023-24"
+#| fig-subcap: 
+#|      - "Environment petitions 2023"
+#|      - "Environment petitions 2024"
+#| layout-ncol: 2
+#| column: page-inset
+titles = ["Pets, Wildlife and environment"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2023, is_path=False, columns_to_plot=["Topic 5 Count"])
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+titles = ["Climate, environment and ECHR"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2024, is_path=False, columns_to_plot=["Topic 16 Count"])
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+```
+
+</div>
+
+# Crime {orientation="columns"}
+
+## Overview {width=30%}
+
+Crime-related petitions have shown evolving themes from sentencing policy (2023) to specific crime types like sexual violence and demostic abuse (2024) and recently is grouped with topics like gender (2025). Geographic patterns reveal some urban-rural divides in petition priorities and Scotland and Northern Ireland generally show less interest most likely as these kinds of petitions would be made seperately for the Scottish and Northern Irish parliaments to amend regional laws.
+
+**Key Trends:**
+
+- 2023 predominantly contains petitions surrounding crime and sentencing such as requiring offenders to be in court for sentencing and some petitions surrounding armed forces accomodation. The former topic largely accounts for the peak in interest in the north west. 
+- Areas around Blackpool and Bournemouth show increased interest in knife crime and sentencing in 2024 from petitions regarding restrictions of carrying knives and time limits around sentencing.
+- Crime concerns expanded in 2025 to include legislation around what consists of a criminal offence i.e. making assaulting a security worker a specific criminal offence. Petitions on sex offences and gender critical beliefs were grouped perhaps because of the language similarities surrounding gender and sex. The former often included petitions surrounding stricter sentencing for sex offenders whilst the former included a popular petition around stopping the protection of gender critical beliefs under the equality act.
+
+## Analysis {width=70%}
+
+<div class="button-container">
+  <button class="viz-button active" onclick="showViz('crime', 'weighted')">Weighted values</button>
+  <button class="viz-button" onclick="showViz('crime', 'raw')">Raw values</button>
+</div>
+
+<div id="crime-weighted" class="viz-content">
+
+```{python}
+#| label: fig 3.a
+#| fig-cap: "Hex maps of crime themed petitions from 2023-25"
+#| fig-subcap: 
+#|      - "Crime petitions 2023"
+#|      - "Crime petitions 2024"
+#|      - "Crime petitions 2025"
+#| layout: [[1, 1], [1]]
+#| column: page-inset
+titles = ["Crime and sentencing"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2023, is_path=False, columns_to_plot=["Weighted Topic 2"])
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+titles = ["Knife crime, violence\nand sexual offences"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2024, is_path=False, columns_to_plot=["Weighted Topic 11"])
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+titles = ["Criminal offences", "Gender Debate\nand Sex Offences"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2025, is_path=False, 
+                   columns_to_plot=["Weighted Topic 1", "Weighted Topic 5"], 
+                   n_cols=2)
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+```
+
+</div>
+
+<div id="crime-raw" class="viz-content" style="display: none;">
+
+```{python}
+#| label: fig 3.b
+#| fig-cap: "Hex maps of crime themed petitions from 2023-25"
+#| fig-subcap: 
+#|      - "Crime petitions 2023"
+#|      - "Crime petitions 2024"
+#|      - "Crime petitions 2025"
+#| layout: [[1, 1], [1]]
+#| column: page-inset
+titles = ["Crime and sentencing"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2023, is_path=False, columns_to_plot=["Topic 2 Count"])
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+titles = ["Knife crime, violence\nand sexual offences"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2024, is_path=False, columns_to_plot=["Topic 11 Count"])
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+
+titles = ["Criminal offences", "Gender Debate\nand Sex Offences"]
+
+hexmapper = HexMap()
+hexmapper.load_map(combined_con_2025, is_path=False, 
+                   columns_to_plot=["Topic 1 Count", "Topic 5 Count"], 
+                   n_cols=2)
+
+title_kwargs = {"fontsize": "16", "fontweight": "6"}
+fig = hexmapper.draw_map(titles=titles, title_kwargs=title_kwargs)
+plt.show()
+```
+
+</div>
+
+<style>
+.button-container {
+  margin: 15px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.viz-button {
+  padding: 8px 16px;
+  border: 2px solid #3498db;
+  background-color: white;
+  color: #3498db;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.viz-button:hover {
+  background-color: #3498db;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.viz-button.active {
+  background-color: #3498db;
+  color: white;
+}
+
+.viz-content {
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+<script>
+function showViz(topic, vizType) {
+  const weightedId = topic + '-weighted';
+  const rawId = topic + '-raw';
+  
+  const weightedDiv = document.getElementById(weightedId);
+  const rawDiv = document.getElementById(rawId);
+  
+  const buttonContainer = event.target.closest('.button-container');
+  const buttons = buttonContainer.querySelectorAll('.viz-button');
+  
+  buttons.forEach(button => {
+    button.classList.remove('active');
+  });
+  
+  if (vizType === 'weighted') {
+    weightedDiv.style.display = 'block';
+    rawDiv.style.display = 'none';
+  } else if (vizType === 'raw') {
+    weightedDiv.style.display = 'none';
+    rawDiv.style.display = 'block';
+  }
+  
+  event.target.classList.add('active');
+}
+</script>
