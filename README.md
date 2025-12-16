@@ -11,3 +11,5 @@ Models have been tested and examined in 4_petitions_data_model_evaluation.ipynb 
 After model has been chosen, data is extracted with 5_petitions_data_model.ipynb. This is done by assigning a probability to each petition and topic using the seletced model, merging with either the constituency data or region data and then running through years, regions and constituencies to calculate the topic weighting by multiplying signature counts by probability for each petition and topic with probability higher than 0.5.
 
 Visuals are created based on the data extracted in 6_petitions_data_visualisation.ipynb and 7_petitions_interactive_visuals.ipynb. 
+
+Interactive visuals have been created and can be seen in the results folder along with a dashboard that was made using quarto.
