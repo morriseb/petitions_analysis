@@ -1,0 +1,651 @@
+,Constituency,q,r
+0,Aldershot,-3,-11
+1,Aldridge-Brownhills,-3,-1
+2,Altrincham and Sale West,-7,3
+3,Amber Valley,0,2
+4,Arundel and South Downs,0,-15
+5,Ashfield,1,2
+6,Ashford,12,-13
+7,Ashton-under-Lyne,-5,6
+8,Aylesbury,2,-6
+9,Banbury,1,-5
+10,Barking,8,-9
+11,Barnsley Central,-2,6
+12,Barnsley East,-1,6
+13,Barrow and Furness,-5,13
+14,Basildon and Billericay,8,-5
+15,Basingstoke,-3,-10
+16,Bassetlaw,2,4
+17,Bath,-6,-9
+18,Batley and Spen,-1,8
+19,Battersea,4,-12
+20,Beaconsfield,-1,-8
+21,Beckenham,7,-14
+22,Bedford,4,-3
+23,Bermondsey and Old Southwark,5,-11
+24,Berwick-upon-Tweed,-4,17
+25,Bethnal Green and Bow,7,-10
+26,Beverley and Holderness,4,8
+27,Bexhill and Battle,10,-15
+28,Bexleyheath and Crayford,9,-10
+29,Birkenhead,-10,2
+30,"Birmingham, Edgbaston",-4,-3
+31,"Birmingham, Erdington",-2,-2
+32,"Birmingham, Hall Green",-3,-4
+33,"Birmingham, Hodge Hill",-1,-2
+34,"Birmingham, Ladywood",-3,-3
+35,"Birmingham, Northfield",-4,-4
+36,"Birmingham, Perry Barr",-3,-2
+37,"Birmingham, Selly Oak",-3,-5
+38,"Birmingham, Yardley",-2,-3
+39,Bishop Auckland,-2,12
+40,Blackburn,-6,10
+41,Blackley and Broughton,-6,6
+42,Blackpool North and Cleveleys,-6,12
+43,Blackpool South,-8,11
+44,Blaydon,-3,14
+45,Blyth Valley,-2,17
+46,Bognor Regis and Littlehampton,2,-15
+47,Bolsover,0,3
+48,Bolton North East,-7,7
+49,Bolton South East,-7,6
+50,Bolton West,-8,7
+51,Bootle,-10,7
+52,Boston and Skegness,4,5
+53,Bosworth,0,-1
+54,Bournemouth East,-8,-13
+55,Bournemouth West,-8,-14
+56,Bracknell,-2,-10
+57,Bradford East,-2,9
+58,Bradford South,-2,8
+59,Bradford West,-3,9
+60,Braintree,8,-2
+61,Brent Central,2,-9
+62,Brent North,1,-9
+63,Brentford and Isleworth,1,-11
+64,Brentwood and Ongar,8,-4
+65,Bridgwater and West Somerset,-11,-12
+66,Brigg and Goole,1,7
+67,"Brighton, Kemptown",7,-15
+68,"Brighton, Pavilion",6,-15
+69,Bristol East,-7,-9
+70,Bristol North West,-8,-9
+71,Bristol South,-7,-10
+72,Bristol West,-8,-10
+73,Broadland,7,2
+74,Bromley and Chislehurst,8,-13
+75,Bromsgrove,-4,-5
+76,Broxbourne,8,-6
+77,Broxtowe,0,1
+78,Buckingham,2,-5
+79,Burnley,-4,10
+80,Burton,-3,1
+81,Bury North,-6,9
+82,Bury South,-6,8
+83,Bury St Edmunds,9,-2
+84,Calder Valley,-4,9
+85,Camberwell and Peckham,6,-12
+86,Camborne and Redruth,-16,-15
+87,Cambridge,6,-1
+88,Cannock Chase,-4,-1
+89,Canterbury,12,-12
+90,Carlisle,-4,14
+91,Carshalton and Wallington,4,-14
+92,Castle Point,10,-7
+93,Central Devon,-13,-13
+94,Central Suffolk and North Ipswich,10,0
+95,Charnwood,3,0
+96,Chatham and Aylesford,10,-11
+97,Cheadle,-5,3
+98,Chelmsford,9,-4
+99,Chelsea and Fulham,2,-11
+100,Cheltenham,-7,-7
+101,Chesham and Amersham,0,-7
+102,Chesterfield,-1,3
+103,Chichester,-1,-15
+104,Chingford and Woodford Green,6,-6
+105,Chippenham,-5,-9
+106,Chipping Barnet,3,-7
+107,Chorley,-7,9
+108,Christchurch,-7,-13
+109,Cities of London and Westminster,4,-11
+110,City of Chester,-8,1
+111,City of Durham,-2,13
+112,Clacton,10,-3
+113,Cleethorpes,2,7
+114,Colchester,9,-3
+115,Colne Valley,-4,7
+116,Congleton,-5,2
+117,Copeland,-6,13
+118,Corby,4,1
+119,Coventry North East,-1,-3
+120,Coventry North West,-1,-4
+121,Coventry South,0,-4
+122,Crawley,1,-14
+123,Crewe and Nantwich,-6,1
+124,Croydon Central,6,-14
+125,Croydon North,6,-13
+126,Croydon South,5,-14
+127,Dagenham and Rainham,9,-8
+128,Darlington,-1,12
+129,Dartford,9,-11
+130,Daventry,1,-3
+131,Denton and Reddish,-4,5
+132,Derby North,-1,2
+133,Derby South,-1,1
+134,Derbyshire Dales,-3,3
+135,Devizes,-5,-10
+136,Dewsbury,-2,7
+137,Don Valley,1,5
+138,Doncaster Central,1,6
+139,Doncaster North,0,6
+140,Dover,13,-12
+141,Dudley North,-7,-3
+142,Dudley South,-6,-4
+143,Dulwich and West Norwood,5,-13
+144,Ealing Central and Acton,1,-10
+145,Ealing North,0,-9
+146,"Ealing, Southall",0,-10
+147,Easington,0,14
+148,East Devon,-11,-14
+149,East Ham,7,-9
+150,East Hampshire,-3,-12
+151,East Surrey,9,-14
+152,East Worthing and Shoreham,4,-15
+153,East Yorkshire,3,10
+154,Eastbourne,9,-15
+155,Eastleigh,-4,-12
+156,Eddisbury,-7,1
+157,Edmonton,5,-7
+158,Ellesmere Port and Neston,-9,1
+159,Elmet and Rothwell,2,10
+160,Eltham,8,-12
+161,Enfield North,5,-6
+162,"Enfield, Southgate",4,-6
+163,Epping Forest,9,-6
+164,Epsom and Ewell,1,-13
+165,Erewash,1,0
+166,Erith and Thamesmead,8,-11
+167,Esher and Walton,-1,-13
+168,Exeter,-12,-13
+169,Fareham,-4,-14
+170,Faversham and Mid Kent,12,-11
+171,Feltham and Heston,0,-11
+172,Filton and Bradley Stoke,-8,-8
+173,Finchley and Golders Green,3,-8
+174,Folkestone and Hythe,12,-14
+175,Forest of Dean,-7,-6
+176,Fylde,-7,10
+177,Gainsborough,2,5
+178,Garston and Halewood,-9,3
+179,Gateshead,-3,15
+180,Gedling,3,2
+181,Gillingham and Rainham,11,-11
+182,Gloucester,-7,-8
+183,Gosport,-3,-14
+184,Grantham and Stamford,3,3
+185,Gravesham,10,-10
+186,Great Grimsby,3,6
+187,Great Yarmouth,8,2
+188,Greenwich and Woolwich,7,-11
+189,Guildford,-2,-13
+190,Hackney North and Stoke Newington,5,-9
+191,Hackney South and Shoreditch,6,-10
+192,Halesowen and Rowley Regis,-6,-3
+193,Halifax,-3,8
+194,Haltemprice and Howden,2,9
+195,Halton,-8,2
+196,Hammersmith,2,-10
+197,Hampstead and Kilburn,3,-9
+198,Harborough,3,-1
+199,Harlow,8,-3
+200,Harrogate and Knaresborough,-2,11
+201,Harrow East,2,-8
+202,Harrow West,1,-8
+203,Hartlepool,1,14
+204,Harwich and North Essex,10,-2
+205,Hastings and Rye,11,-14
+206,Havant,-1,-14
+207,Hayes and Harlington,-1,-9
+208,Hazel Grove,-4,4
+209,Hemel Hempstead,5,-5
+210,Hemsworth,0,7
+211,Hendon,2,-7
+212,Henley,1,-6
+213,Hereford and South Herefordshire,-7,-5
+214,Hertford and Stortford,7,-3
+215,Hertsmere,7,-5
+216,Hexham,-4,16
+217,Heywood and Middleton,-5,8
+218,High Peak,-3,4
+219,Hitchin and Harpenden,5,-3
+220,Holborn and St Pancras,4,-10
+221,Hornchurch and Upminster,8,-8
+222,Hornsey and Wood Green,4,-7
+223,Horsham,1,-15
+224,Houghton and Sunderland South,-1,14
+225,Hove,5,-15
+226,Huddersfield,-3,7
+227,Huntingdon,5,-2
+228,Hyndburn,-5,10
+229,Ilford North,6,-7
+230,Ilford South,7,-8
+231,Ipswich,9,-1
+232,Isle of Wight,-6,-15
+233,Islington North,4,-9
+234,Islington South and Finsbury,5,-10
+235,Jarrow,-1,15
+236,Keighley,-3,10
+237,Kenilworth and Southam,1,-4
+238,Kensington,3,-10
+239,Kettering,4,0
+240,Kingston and Surbiton,0,-13
+241,Kingston upon Hull East,3,7
+242,Kingston upon Hull North,3,9
+243,Kingston upon Hull West and Hessle,3,8
+244,Kingswood,-6,-8
+245,Knowsley,-9,6
+246,Lancaster and Fleetwood,-4,12
+247,Leeds Central,0,9
+248,Leeds East,1,9
+249,Leeds North East,1,10
+250,Leeds North West,0,10
+251,Leeds West,-1,9
+252,Leicester East,2,-1
+253,Leicester South,2,-2
+254,Leicester West,1,-1
+255,Leigh,-8,6
+256,Lewes,8,-15
+257,Lewisham East,7,-13
+258,Lewisham West and Penge,7,-12
+259,"Lewisham, Deptford",6,-11
+260,Leyton and Wanstead,6,-8
+261,Lichfield,-2,0
+262,Lincoln,3,5
+263,"Liverpool, Riverside",-10,4
+264,"Liverpool, Walton",-10,6
+265,"Liverpool, Wavertree",-10,3
+266,"Liverpool, West Derby",-10,5
+267,Loughborough,2,0
+268,Louth and Horncastle,4,6
+269,Ludlow,-8,-2
+270,Luton North,5,-4
+271,Luton South,4,-5
+272,Macclesfield,-4,3
+273,Maidenhead,-2,-7
+274,Maidstone and The Weald,11,-12
+275,Makerfield,-9,7
+276,Maldon,11,-4
+277,Manchester Central,-6,5
+278,"Manchester, Gorton",-5,5
+279,"Manchester, Withington",-6,4
+280,Mansfield,1,3
+281,Meon Valley,-4,-13
+282,Meriden,-2,-5
+283,Mid Bedfordshire,4,-4
+284,Mid Derbyshire,-2,2
+285,Mid Dorset and North Poole,-8,-12
+286,Mid Norfolk,6,1
+287,Mid Sussex,10,-14
+288,Mid Worcestershire,-5,-5
+289,Middlesbrough,1,12
+290,Middlesbrough South and East Cleveland,2,12
+291,Milton Keynes North,3,-3
+292,Milton Keynes South,3,-4
+293,Mitcham and Morden,3,-14
+294,Mole Valley,0,-14
+295,Morecambe and Lunesdale,-5,12
+296,Morley and Outwood,0,8
+297,New Forest East,-6,-13
+298,New Forest West,-6,-12
+299,Newark,3,4
+300,Newbury,-4,-7
+301,Newcastle upon Tyne Central,-4,15
+302,Newcastle upon Tyne East,-2,16
+303,Newcastle upon Tyne North,-3,16
+304,Newcastle-under-Lyme,-5,1
+305,Newton Abbot,-12,-14
+306,"Normanton, Pontefract and Castleford",1,8
+307,North Cornwall,-14,-14
+308,North Devon,-12,-12
+309,North Dorset,-7,-12
+310,North Durham,-2,14
+311,North East Bedfordshire,4,-2
+312,North East Cambridgeshire,6,0
+313,North East Derbyshire,-2,3
+314,North East Hampshire,-3,-9
+315,North East Hertfordshire,6,-3
+316,North East Somerset,-6,-10
+317,North Herefordshire,-8,-4
+318,North Norfolk,6,2
+319,North Shropshire,-8,0
+320,North Somerset,-9,-11
+321,North Swindon,-5,-7
+322,North Thanet,13,-10
+323,North Tyneside,-1,16
+324,North Warwickshire,-1,-1
+325,North West Cambridgeshire,5,-1
+326,North West Durham,-3,13
+327,North West Hampshire,-4,-10
+328,North West Leicestershire,0,0
+329,North West Norfolk,5,1
+330,North Wiltshire,-5,-8
+331,Northampton North,3,-2
+332,Northampton South,2,-3
+333,Norwich North,7,1
+334,Norwich South,8,0
+335,Nottingham East,2,1
+336,Nottingham North,2,2
+337,Nottingham South,1,1
+338,Nuneaton,0,-2
+339,Old Bexley and Sidcup,9,-12
+340,Oldham East and Saddleworth,-5,7
+341,Oldham West and Royton,-6,7
+342,Orpington,8,-14
+343,Oxford East,0,-5
+344,Oxford West and Abingdon,0,-6
+345,Pendle,-5,11
+346,Penistone and Stocksbridge,-3,6
+347,Penrith and The Border,-5,15
+348,Peterborough,5,0
+349,"Plymouth, Moor View",-13,-15
+350,"Plymouth, Sutton and Devonport",-13,-16
+351,Poole,-9,-13
+352,Poplar and Limehouse,8,-10
+353,Portsmouth North,-3,-13
+354,Portsmouth South,-2,-14
+355,Preston,-7,11
+356,Pudsey,-1,10
+357,Putney,3,-12
+358,Rayleigh and Wickford,9,-5
+359,Reading East,-3,-7
+360,Reading West,-3,-8
+361,Redcar,1,13
+362,Redditch,-4,-6
+363,Reigate,2,-14
+364,Ribble Valley,-3,12
+365,Richmond (Yorks),-3,11
+366,Richmond Park,1,-12
+367,Rochdale,-4,8
+368,Rochester and Strood,11,-10
+369,Rochford and Southend East,10,-5
+370,Romford,7,-7
+371,Romsey and Southampton North,-5,-11
+372,Rossendale and Darwen,-5,9
+373,Rother Valley,1,4
+374,Rotherham,0,5
+375,Rugby,0,-3
+376,"Ruislip, Northwood and Pinner",1,-7
+377,Runnymede and Weybridge,-1,-12
+378,Rushcliffe,3,1
+379,Rutland and Melton,4,2
+380,Saffron Walden,7,-2
+381,Salford and Eccles,-7,5
+382,Salisbury,-6,-11
+383,Scarborough and Whitby,2,11
+384,Scunthorpe,2,6
+385,Sedgefield,-1,13
+386,Sefton Central,-9,8
+387,Selby and Ainsty,2,8
+388,Sevenoaks,9,-13
+389,Sheffield Central,-1,4
+390,Sheffield South East,0,4
+391,"Sheffield, Brightside and Hillsborough",-2,5
+392,"Sheffield, Hallam",-3,5
+393,"Sheffield, Heeley",-2,4
+394,Sherwood,2,3
+395,Shipley,-2,10
+396,Shrewsbury and Atcham,-9,-1
+397,Sittingbourne and Sheppey,12,-10
+398,Skipton and Ripon,-4,11
+399,Sleaford and North Hykeham,4,4
+400,Slough,-2,-8
+401,Solihull,-2,-4
+402,Somerton and Frome,-8,-11
+403,South Basildon and East Thurrock,9,-7
+404,South Cambridgeshire,6,-2
+405,South Derbyshire,-2,1
+406,South Dorset,-9,-15
+407,South East Cambridgeshire,7,-1
+408,South East Cornwall,-14,-15
+409,South Holland and The Deepings,4,3
+410,South Leicestershire,1,-2
+411,South Norfolk,9,0
+412,South Northamptonshire,2,-4
+413,South Ribble,-8,9
+414,South Shields,0,16
+415,South Staffordshire,-6,0
+416,South Suffolk,10,-1
+417,South Swindon,-4,-8
+418,South Thanet,13,-11
+419,South West Bedfordshire,3,-5
+420,South West Devon,-13,-14
+421,South West Hertfordshire,3,-6
+422,South West Norfolk,7,0
+423,South West Surrey,-2,-12
+424,South West Wiltshire,-7,-11
+425,"Southampton, Itchen",-5,-13
+426,"Southampton, Test",-5,-12
+427,Southend West,10,-6
+428,Southport,-9,9
+429,Spelthorne,-1,-11
+430,St Albans,6,-5
+431,St Austell and Newquay,-15,-15
+432,St Helens North,-9,5
+433,St Helens South and Whiston,-9,4
+434,St Ives,-16,-16
+435,Stafford,-4,0
+436,Staffordshire Moorlands,-3,2
+437,Stalybridge and Hyde,-4,6
+438,Stevenage,6,-4
+439,Stockport,-5,4
+440,Stockton North,0,13
+441,Stockton South,0,12
+442,Stoke-on-Trent Central,-4,1
+443,Stoke-on-Trent North,-4,2
+444,Stoke-on-Trent South,-3,0
+445,Stone,-5,0
+446,Stourbridge,-5,-4
+447,Stratford-on-Avon,-3,-6
+448,Streatham,4,-13
+449,Stretford and Urmston,-7,4
+450,Stroud,-6,-7
+451,Suffolk Coastal,9,1
+452,Sunderland Central,0,15
+453,Surrey Heath,-1,-10
+454,Sutton and Cheam,2,-13
+455,Sutton Coldfield,-2,-1
+456,Tamworth,-1,0
+457,Tatton,-6,2
+458,Taunton Deane,-10,-13
+459,Telford,-8,-1
+460,Tewkesbury,-6,-6
+461,The Cotswolds,-5,-6
+462,The Wrekin,-7,0
+463,Thirsk and Malton,1,11
+464,Thornbury and Yate,-8,-7
+465,Thurrock,8,-7
+466,Tiverton and Honiton,-11,-13
+467,Tonbridge and Malling,10,-12
+468,Tooting,3,-13
+469,Torbay,-12,-15
+470,Torridge and West Devon,-14,-13
+471,Totnes,-12,-16
+472,Tottenham,4,-8
+473,Truro and Falmouth,-15,-16
+474,Tunbridge Wells,10,-13
+475,Twickenham,0,-12
+476,Tynemouth,-1,17
+477,Uxbridge and South Ruislip,0,-8
+478,Vauxhall,5,-12
+479,Wakefield,-1,7
+480,Wallasey,-11,3
+481,Walsall North,-6,-1
+482,Walsall South,-5,-1
+483,Walthamstow,5,-8
+484,Wansbeck,-3,17
+485,Wantage,-2,-6
+486,Warley,-5,-3
+487,Warrington North,-8,4
+488,Warrington South,-8,3
+489,Warwick and Leamington,-1,-5
+490,Washington and Sunderland West,-2,15
+491,Watford,7,-6
+492,Waveney,8,1
+493,Wealden,11,-13
+494,Weaver Vale,-7,2
+495,Wellingborough,4,-1
+496,Wells,-10,-12
+497,Welwyn Hatfield,7,-4
+498,Wentworth and Dearne,-1,5
+499,West Bromwich East,-4,-2
+500,West Bromwich West,-5,-2
+501,West Dorset,-9,-14
+502,West Ham,6,-9
+503,West Lancashire,-8,8
+504,West Suffolk,8,-1
+505,West Worcestershire,-7,-4
+506,Westminster North,3,-11
+507,Westmorland and Lonsdale,-4,13
+508,Weston-Super-Mare,-9,-12
+509,Wigan,-7,8
+510,Wimbledon,2,-12
+511,Winchester,-4,-11
+512,Windsor,-2,-9
+513,Wirral South,-9,2
+514,Wirral West,-11,2
+515,Witham,10,-4
+516,Witney,-1,-6
+517,Woking,-2,-11
+518,Wokingham,-4,-9
+519,Wolverhampton North East,-7,-1
+520,Wolverhampton South East,-6,-2
+521,Wolverhampton South West,-7,-2
+522,Worcester,-6,-5
+523,Workington,-5,14
+524,Worsley and Eccles South,-8,5
+525,Worthing West,3,-15
+526,Wycombe,-1,-7
+527,Wyre and Preston North,-6,11
+528,Wyre Forest,-8,-3
+529,Wythenshawe and Sale East,-6,3
+530,Yeovil,-10,-14
+531,York Central,0,11
+532,York Outer,-1,11
+533,Belfast East,-14,13
+534,Belfast North,-14,14
+535,Belfast South,-14,12
+536,Belfast West,-15,13
+537,East Antrim,-14,15
+538,East Londonderry,-16,15
+539,Fermanagh and South Tyrone,-17,13
+540,Foyle,-17,15
+541,Lagan Valley,-15,12
+542,Mid Ulster,-16,14
+543,Newry and Armagh,-15,11
+544,North Antrim,-15,15
+545,North Down,-13,14
+546,South Antrim,-15,14
+547,South Down,-13,12
+548,Strangford,-13,13
+549,Upper Bann,-16,12
+550,West Tyrone,-17,14
+551,Aberdeen North,-4,25
+552,Aberdeen South,-3,24
+553,Airdrie and Shotts,-7,20
+554,Angus,-5,23
+555,Argyll and Bute,-8,23
+556,"Ayr, Carrick and Cumnock",-8,16
+557,Banff and Buchan,-5,24
+558,"Berwickshire, Roxburgh and Selkirk",-5,17
+559,"Caithness, Sutherland and Easter Ross",-6,26
+560,Central Ayrshire,-10,17
+561,"Coatbridge, Chryston and Bellshill",-8,20
+562,"Cumbernauld, Kilsyth and Kirkintilloch East",-8,21
+563,Dumfries and Galloway,-6,16
+564,"Dumfriesshire, Clydesdale and Tweeddale",-5,16
+565,Dundee East,-5,22
+566,Dundee West,-6,23
+567,Dunfermline and West Fife,-6,21
+568,East Dunbartonshire,-8,22
+569,"East Kilbride, Strathaven and Lesmahagow",-8,17
+570,East Lothian,-4,18
+571,East Renfrewshire,-10,18
+572,Edinburgh East,-5,19
+573,Edinburgh North and Leith,-6,19
+574,Edinburgh South,-5,18
+575,Edinburgh South West,-6,18
+576,Edinburgh West,-7,19
+577,Na h-Eileanan an Iar,-8,26
+578,Falkirk,-7,21
+579,Glasgow Central,-9,19
+580,Glasgow East,-8,18
+581,Glasgow North,-9,20
+582,Glasgow North East,-9,21
+583,Glasgow North West,-10,21
+584,Glasgow South,-9,18
+585,Glasgow South West,-10,19
+586,Glenrothes,-4,22
+587,Gordon,-5,25
+588,Inverclyde,-11,21
+589,"Inverness, Nairn, Badenoch and Strathspey",-7,25
+590,Kilmarnock and Loudoun,-7,16
+591,Kirkcaldy and Cowdenbeath,-5,21
+592,Lanark and Hamilton East,-7,17
+593,Linlithgow and East Falkirk,-6,20
+594,Livingston,-7,18
+595,Midlothian,-6,17
+596,Moray,-6,24
+597,Motherwell and Wishaw,-8,19
+598,North Ayrshire and Arran,-11,18
+599,North East Fife,-4,23
+600,Ochil and South Perthshire,-6,22
+601,Orkney and Shetland,-5,28
+602,Paisley and Renfrewshire North,-10,20
+603,Paisley and Renfrewshire South,-11,19
+604,Perth and North Perthshire,-7,23
+605,"Ross, Skye and Lochaber",-7,24
+606,Rutherglen and Hamilton West,-9,17
+607,Stirling,-7,22
+608,West Aberdeenshire and Kincardine,-4,24
+609,West Dunbartonshire,-9,22
+610,Ynys Môn,-14,1
+611,Delyn,-11,1
+612,Alyn and Deeside,-10,1
+613,Wrexham,-9,0
+614,Llanelli,-14,-8
+615,Gower,-14,-9
+616,Swansea West,-13,-8
+617,Swansea East,-13,-7
+618,Aberavon,-12,-8
+619,Cardiff Central,-9,-8
+620,Cardiff North,-10,-7
+621,Rhondda,-11,-6
+622,Torfaen,-9,-5
+623,Monmouth,-8,-5
+624,Newport East,-8,-6
+625,Newport West,-9,-7
+626,Arfon,-13,-1
+627,Aberconwy,-12,0
+628,Clwyd West,-11,0
+629,Vale of Clwyd,-10,0
+630,Dwyfor Meirionnydd,-12,-1
+631,Clwyd South,-10,-1
+632,Montgomeryshire,-11,-1
+633,Ceredigion,-12,-6
+634,Preseli Pembrokeshire,-15,-7
+635,Carmarthen West and South Pembrokeshire,-15,-8
+636,Carmarthen East and Dinefwr,-14,-7
+637,Brecon and Radnorshire,-9,-2
+638,Neath,-12,-7
+639,Cynon Valley,-10,-5
+640,Merthyr Tydfil and Rhymney,-9,-4
+641,Blaenau Gwent,-9,-3
+642,Bridgend,-12,-9
+643,Ogmore,-11,-8
+644,Pontypridd,-11,-7
+645,Caerphilly,-10,-6
+646,Islwyn,-9,-6
+647,Vale of Glamorgan,-11,-9
+648,Cardiff West,-10,-8
+649,Cardiff South and Penarth,-10,-9
